@@ -9,6 +9,7 @@ import com.ecommerce.website.models.CategoryEntity;
 import com.ecommerce.website.service.CategoryService;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
     private final CategoryService service;
     public CategoryController(CategoryService service) {
@@ -16,14 +17,14 @@ public class CategoryController {
     }
     private List<CategoryEntity> Categories = new ArrayList<>();
 
-    @GetMapping("/api/public/categories")
+    @GetMapping("/public/categories")
     public List<CategoryEntity> getAllCategories()
     {
         List<CategoryEntity> categories = service.getAllCategories();
         return categories;
     }
 
-    @PostMapping("/api/admin/category")
+    @PostMapping("/admin/category")
     public List<CategoryEntity> addCategory(@RequestBody CategoryEntity category)
     {
         List<CategoryEntity> c1 = service.insertCategory(category);
@@ -36,7 +37,7 @@ public class CategoryController {
     }
 
 
-    @DeleteMapping("/api/admin/category/{id}")
+    @DeleteMapping("/admin/category/{id}")
 
     public void DeleteCategory(@PathVariable Long id){
         service.deleteCategory(id);
