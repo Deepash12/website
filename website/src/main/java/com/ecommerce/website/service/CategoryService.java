@@ -30,6 +30,7 @@ package com.ecommerce.website.service;
 
 import java.util.List;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -49,4 +50,27 @@ public class CategoryService {
         List<CategoryEntity> c1 = Collections.singletonList(repository.save(category));
         return c1;
     }
+
+    public void deleteCategory(Long id)
+    {
+        repository.deleteById(id);
+
+
+    }
+
+
+    public List<CategoryEntity> getAllCategories() {
+        List<CategoryEntity> c1 = repository.findAll();
+        return c1;
+    }
+
+    public CategoryEntity updateCategory(Long id, CategoryEntity updatedCategory) {
+            return repository.findById(id)
+                    .map(existingCategory ->
+                    {
+                        existingCategory.setName(updatedCategory.getName());
+                        return repository.save(existingCategory);
+                    })
+                    .orElseThrow(() -> new RuntimeException("Category not found with ID: " + id));
+        }
 }
