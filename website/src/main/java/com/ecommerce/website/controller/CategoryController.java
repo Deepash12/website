@@ -1,6 +1,4 @@
 package com.ecommerce.website.controller;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +13,7 @@ public class CategoryController {
     public CategoryController(CategoryService service) {
         this.service = service;
     }
-    private List<CategoryEntity> Categories = new ArrayList<>();
+    
 
     @GetMapping("/public/categories")
     public List<CategoryEntity> getAllCategories()
